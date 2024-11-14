@@ -1,0 +1,38 @@
+3 microservices :
+- IHM
+- Calcul (Python)
+- Interface BDD (C#)
+
+Le microservice IHM va permettre à l'utilisateur de rentrer un nombre.
+
+Le microservice Calcul va regarder si un nombre est :
+- pair/impair
+- premier
+- parfait
+- suite de syracuse
+
+Le microservice Interface BDD va permettre de stocker les résultats des calculs dans une base de données relationnelle et MinIO pour la suite de syracuse.
+
+# IHM
+- Récupérer un nombre
+- Envoyer le nombre au microservice Calcul
+- Afficher les résultats
+
+# Calcul
+- Récupérer le nombre
+- Calculer si le nombre est pair/impair
+- Calculer si le nombre est premier
+- Calculer si le nombre est parfait
+- Calculer la suite de syracuse
+- Envoyer les résultats au microservice Interface BDD
+
+# Interface BDD
+- Récupérer les résultats
+- Stocker les résultats dans une base de données relationnelle
+- Stocker la suite de syracuse dans un fichier
+
+
+
+# Rendu
+- 1 docker-compose.yml
+- 3 Dockerfile
