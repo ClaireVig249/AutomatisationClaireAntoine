@@ -1,0 +1,4 @@
+Documentation
+
+Doc sur minio ( utilité, installation ) : 
+https://blog.stephane-robert.info/docs/services/stockage/minio/
