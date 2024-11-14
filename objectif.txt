@@ -1,5 +1,5 @@
 3 microservices :
-- IHM
+- IHM (PHP)
 - Calcul (Python)
 - Interface BDD (C#)
 
@@ -35,4 +35,4 @@ Le microservice Interface BDD va permettre de stocker les résultats des calculs
 
 # Rendu
 - 1 docker-compose.yml
-- 3 Dockerfile
+- 3 Dockerfile (1 par microservice)

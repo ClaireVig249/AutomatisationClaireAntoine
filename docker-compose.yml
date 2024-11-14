@@ -1,0 +1,57 @@
+services:
+  # Interface Homme-Machine en HTML/CSS/JS/PHP
+  ihm:
+    build: ./ihm
+    ports:
+      - "8080:8080"
+    networks:
+      - calc_net
+
+  # Calculateur en Python
+  calc:
+    build: ./calc
+    ports:
+      - "8081:8081"
+    networks:
+      - calc_net
+
+  # Interface BDD en C#
+  int_db:
+    build: ./int_db
+    ports:
+      - "8082:8082"
+    networks:
+      - calc_net
+
+  # Base de données MySQL
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: calc
+    ports:
+      - "3306:3306"
+    networks:
+      - calc_net
+
+  # Serveur Minio
+  minio:
+    image: minio/minio
+    command: server /data --console-address ":9001"
+    environment:
+      - MINIO_ROOT_USER=minioadmin
+      - MINIO_ROOT_PASSWORD=minioadmin
+    volumes:
+      - minio_data:/data
+    ports:
+      - 9000:9000
+      - 9001:9001
+    networks:
+      - calc_net
+
+networks:
+  calc_net:
+    driver: bridge
+
+volumes:
+  minio_data:
