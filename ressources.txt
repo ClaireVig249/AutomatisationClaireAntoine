@@ -1,8 +1,8 @@
 Documentation
 
 Doc sur minio ( utilité, installation ) : 
-https://blog.stephane-robert.info/docs/services/stockage/minio/
+- https://blog.stephane-robert.info/docs/services/stockage/minio/
 
 Intégration minio au docker-compose : 
-https://www.sefidian.com/2022/04/08/deploy-standalone-minio-using-docker-compose/
-
+- https://www.sefidian.com/2022/04/08/deploy-standalone-minio-using-docker-compose/
+- https://www.nathaniel-walser.com/docker-compose-templates/minio
