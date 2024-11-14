@@ -1,7 +1,9 @@
 services:
   # Interface Homme-Machine en HTML/CSS/JS/PHP
   ihm:
-    build: ./ihm
+    image: php:7.4-apache
+    volumes:
+      - ./ihm:/var/www/html
     ports:
       - "8080:8080"
     networks:
@@ -9,7 +11,9 @@ services:
 
   # Calculateur en Python
   calc:
-    build: ./calc
+    image: python:3.8
+    volumes:
+      - ./calc:/calc
     ports:
       - "8081:8081"
     networks:
@@ -17,7 +21,9 @@ services:
 
   # Interface BDD en C#
   int_db:
-    build: ./int_db
+    image: mcr.microsoft.com/dotnet/core/sdk:3.1
+    volumes:
+      - ./int_db:/int_db
     ports:
       - "8082:8082"
     networks:
@@ -46,6 +52,13 @@ services:
     ports:
       - 9000:9000
       - 9001:9001
+    networks:
+      - calc_net
+
+  bucket_s3:
+    image: minio/mc
+    entrypoint: mc
+    command: mb s3/minio
     networks:
       - calc_net
 
