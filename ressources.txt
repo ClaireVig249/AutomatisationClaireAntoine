@@ -6,3 +6,6 @@ Doc sur minio ( utilité, installation ) :
 Intégration minio au docker-compose : 
 - https://www.sefidian.com/2022/04/08/deploy-standalone-minio-using-docker-compose/
 - https://www.nathaniel-walser.com/docker-compose-templates/minio
+
+Conteneurisation d'une application en C# :
+- https://learn.microsoft.com/fr-fr/dotnet/core/docker/build-container?tabs=windows
