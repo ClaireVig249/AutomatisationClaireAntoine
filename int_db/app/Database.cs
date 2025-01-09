@@ -1,5 +1,4 @@
-﻿using System;
-using MySql.Data.MySqlClient; // Nécessaire pour interagir avec MySQL
+﻿using MySql.Data.MySqlClient; // Nécessaire pour interagir avec MySQL
 
 namespace IntDB
 {
@@ -10,7 +9,7 @@ namespace IntDB
     /// - Récupérer les résultats de ces requêtes
     /// - Fermer la connexion à la base de données
     /// </summary>
-    public class Database
+    internal class Database
     {
         private MySqlConnection _connection;
 

@@ -13,6 +13,9 @@ COPY ./ ./
 # Restaurer les dépendances
 RUN dotnet restore "IntDB.csproj"
 
+# Installer le package Minio
+RUN dotnet add package Minio
+
 # Construire l'application
 RUN dotnet build "IntDB.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
