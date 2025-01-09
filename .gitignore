@@ -1,1 +1,79 @@
-*.vs
+# Fichiers de log et temporaires
+*.log
+*.tmp
+*.temp
+*.swp
+*.swo
+*.bak
+*.old
+
+# Dossiers temporaires
+/tmp/
+/cache/
+*.DS_Store
+Thumbs.db
+
+# Dossiers communs aux frameworks PHP
+/vendor/
+node_modules/
+.env
+.env.*
+
+# Fichiers de configuration spécifiques (PHP)
+phpunit.xml
+phpunit.xml.dist
+
+# C#
+[Bb]in/
+[Oo]bj/
+*.user
+*.suo
+*.pdb
+*.cache
+*.log
+*.vs/
+.vscode/
+*.dbmdl
+*.jfm
+*.generated.cs
+*.g.cs
+*.g.i.cs
+*.dll
+*.exe
+*.app/
+*.appcache
+*.ipa
+*.apk
+*.iobj
+*.ipdb
+
+# Spécifique aux projets Visual Studio
+.vs/
+*.vcxproj*
+*.nupkg
+*.snupkg
+*.resx
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg
+*.egg-info/
+dist/
+build/
+*.sqlite3
+
+# Environnements virtuels (Python)
+.venv/
+env/
+venv/
+ENV/
+
+# Autres outils et IDE
+.idea/
+*.iml
+.project
+.classpath
+*.pydevproject
