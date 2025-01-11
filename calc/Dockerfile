@@ -1,10 +1,16 @@
-FROM python:3
-
+FROM python:3.13
 WORKDIR /calc/usr/src/app
 
+# Install the application dependencies
 COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY . .
+# Copy in the source code
+COPY src ./src
+EXPOSE 5000
 
-CMD [ "python", "./your-daemon-or-script.py" ]
+# Setup an app user so the container doesn't run as the root user
+RUN useradd app
+USER app
+
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8080", "python", "./your-daemon-or-script.py"]
