@@ -12,6 +12,7 @@ Conteneurisation d'un projet PHP :
 - https://hub.docker.com/_/php
 
 Conteneurisation d'une application en C# :
+- https://hub.docker.com/r/microsoft/dotnet
 - https://learn.microsoft.com/fr-fr/dotnet/core/docker/build-container?tabs=windows
 - https://learn.microsoft.com/fr-fr/visualstudio/containers/overview?view=vs-2022
 - https://min.io/docs/minio/linux/developers/dotnet/minio-dotnet.html
