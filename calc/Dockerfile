@@ -15,4 +15,4 @@ COPY src ./src
 EXPOSE 8080
 
 # Lancer l'application avec uvicorn
-CMD ["uvicorn", "src.app.main:app", "--host", "0.0.0.0", "--port", "8080"]
+CMD ["python", "src/app/calculs.py"]
