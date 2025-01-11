@@ -14,7 +14,7 @@ services:
   calc:
     build: ./calc
     volumes:
-      - ./calc:/calc
+      - ./calc/src:/usr/src/app/src
     ports:
       - "8081:80"
     networks:

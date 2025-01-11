@@ -1,16 +1,18 @@
+# Utiliser l'image Python 3.13
 FROM python:3.13
-WORKDIR /calc/usr/src/app
 
-# Install the application dependencies
+# Définir le répertoire de travail
+WORKDIR /usr/src/app
+
+# Copier et installer les dépendances
 COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy in the source code
-COPY ./ ./
-EXPOSE 5000
+# Copier le code source
+COPY src ./src
 
-# Setup an app user so the container doesn't run as the root user
-RUN useradd app
-USER app
+# Exposer le port pour l'application
+EXPOSE 8080
 
-CMD ["python", "./your-daemon-or-script.py"]
+# Lancer l'application avec uvicorn
+CMD ["uvicorn", "src.app.main:app", "--host", "0.0.0.0", "--port", "8080"]
