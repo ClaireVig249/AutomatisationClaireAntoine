@@ -23,7 +23,7 @@
         <h2>Bienvenue</h2>
         <p>CalcuPHP#lation est un outil de calcul en ligne. Il vous permet de réaliser des opérations simples et complexes.</p>
         <p>Veuillez saisir un nombre ci-dessous :</p>
-        <form action="result.php" method="post">
+        <form action="/result" method="post">
             <input type="number" name="number" required>
             <button type="submit">Calculer</button>
         </form>

@@ -1,0 +1,9 @@
+# Active le moteur de réécriture d'URL
+RewriteEngine On
+
+# Réécrire les URL
+RewriteRule ^result$ /scripts/result.php [L,QSA]
+
+# Suppression du fichier index.php dans l'URL
+RewriteCond %{THE_REQUEST} \s/+(index\.php) [NC]
+RewriteRule ^index\.php$ / [R=301,L]
