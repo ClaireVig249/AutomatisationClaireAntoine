@@ -1,10 +1,11 @@
+# Utiliser l'image officielle de PHP 8.3 avec Apache
 FROM php:8.3-apache
 
-# PHP
+# Installer les dépendances
 RUN apt-get update && apt-get install -y libpq-dev
 RUN docker-php-ext-install pdo pdo_pgsql
 
-# Apache
+# Activer le module rewrite
 RUN a2enmod rewrite
 
 # Définir le répertoire de travail
