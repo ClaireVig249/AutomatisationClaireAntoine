@@ -30,7 +30,7 @@ namespace IntDB
                 string connectionString = $"Server={Host};Port={Port};Database={Name};Uid={User};Pwd={Password};";
                 _connection = new MySqlConnection(connectionString);
                 _connection.Open();
-                Console.WriteLine("Connexion à la base de données réussie.");
+                Console.WriteLine($"Connexion à la base de données réussie avec {Host}:{Port}.");
             }
             catch (Exception ex)
             {

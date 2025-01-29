@@ -35,7 +35,7 @@ namespace IntDB
                     .WithCredentials(AccessKey, SecretKey)
                     .Build();
 
-                Console.WriteLine("Connexion à MinIO réussie.");
+                Console.WriteLine($"Connexion à MinIO réussie avec {Host}:{Port}.");
             }
             catch (Exception ex)
             {
@@ -52,6 +52,13 @@ namespace IntDB
             try
             {
                 var buckets = await _minioClient.ListBucketsAsync();
+                
+                if (buckets.Buckets.Count == 0)
+                {
+                    Console.WriteLine("Aucun bucket trouvé.");
+                    return;
+                }
+                
                 Console.WriteLine("Liste des buckets :");
                 foreach (var bucket in buckets.Buckets)
                 {

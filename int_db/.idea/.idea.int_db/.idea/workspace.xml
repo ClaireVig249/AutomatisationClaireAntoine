@@ -8,116 +8,43 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4e67c0ba-0b5c-4968-b450-ab4085bb1e2e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/global.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/int_db/Database.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/int_db/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/int_db/Minio.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.AutomatisationClaireAntoine/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.AutomatisationClaireAntoine/.idea/.name" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.AutomatisationClaireAntoine/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.AutomatisationClaireAntoine/.idea/indexLayout.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.AutomatisationClaireAntoine/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.AutomatisationClaireAntoine/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/AutomatisationClaireAntoine.sln" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/.dockerignore" beforeDir="false" afterPath="$PROJECT_DIR$/.dockerignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/.idea/indexLayout.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/.idea/projectSettingsUpdater.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Database.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Dockerfile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/IntDB.csproj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Minio.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Program.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/bin/Debug/net9.0/BouncyCastle.Cryptography.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/bin/Debug/net9.0/Google.Protobuf.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/bin/Debug/net9.0/IntDB.deps.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/bin/Debug/net9.0/IntDB.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/bin/Debug/net9.0/IntDB.exe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/bin/Debug/net9.0/IntDB.pdb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/bin/Debug/net9.0/IntDB.runtimeconfig.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/bin/Debug/net9.0/K4os.Compression.LZ4.Streams.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/bin/Debug/net9.0/K4os.Compression.LZ4.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/bin/Debug/net9.0/K4os.Hash.xxHash.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/bin/Debug/net9.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/bin/Debug/net9.0/Microsoft.Extensions.Logging.Abstractions.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/bin/Debug/net9.0/MySql.Data.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/bin/Debug/net9.0/MySqlConnector.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/bin/Debug/net9.0/System.Configuration.ConfigurationManager.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/bin/Debug/net9.0/System.Diagnostics.EventLog.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/bin/Debug/net9.0/System.Security.Cryptography.ProtectedData.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/bin/Debug/net9.0/System.Security.Permissions.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/bin/Debug/net9.0/System.Windows.Extensions.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/bin/Debug/net9.0/ZstdSharp.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/bin/Debug/net9.0/runtimes/win-x64/native/comerr64.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/bin/Debug/net9.0/runtimes/win-x64/native/gssapi64.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/bin/Debug/net9.0/runtimes/win-x64/native/k5sprt64.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/bin/Debug/net9.0/runtimes/win-x64/native/krb5_64.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/bin/Debug/net9.0/runtimes/win-x64/native/krbcc64.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/bin/Debug/net9.0/runtimes/win/lib/net8.0/System.Diagnostics.EventLog.Messages.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/bin/Debug/net9.0/runtimes/win/lib/net8.0/System.Diagnostics.EventLog.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/bin/Debug/net9.0/runtimes/win/lib/net8.0/System.Windows.Extensions.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/obj/ConsoleApp1.csproj.nuget.dgspec.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/obj/ConsoleApp1.csproj.nuget.g.props" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/obj/ConsoleApp1.csproj.nuget.g.targets" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/obj/Debug/net9.0/.NETCoreApp,Version=v9.0.AssemblyAttributes.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/obj/Debug/net9.0/ConsoleApp1.AssemblyInfo.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/obj/Debug/net9.0/ConsoleApp1.AssemblyInfoInputs.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/obj/Debug/net9.0/ConsoleApp1.GeneratedMSBuildEditorConfig.editorconfig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/obj/Debug/net9.0/ConsoleApp1.GlobalUsings.g.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/obj/Debug/net9.0/ConsoleApp1.assets.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/obj/Debug/net9.0/IntDB.AssemblyInfo.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/obj/Debug/net9.0/IntDB.AssemblyInfoInputs.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/obj/Debug/net9.0/IntDB.GeneratedMSBuildEditorConfig.editorconfig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/obj/Debug/net9.0/IntDB.GlobalUsings.g.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/obj/Debug/net9.0/IntDB.assets.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/obj/Debug/net9.0/IntDB.csproj.AssemblyReference.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/obj/Debug/net9.0/IntDB.csproj.BuildWithSkipAnalyzers" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/obj/Debug/net9.0/IntDB.csproj.CoreCompileInputs.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/obj/Debug/net9.0/IntDB.csproj.FileListAbsolute.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/obj/Debug/net9.0/IntDB.csproj.Up2Date" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/obj/Debug/net9.0/IntDB.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/obj/Debug/net9.0/IntDB.genruntimeconfig.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/obj/Debug/net9.0/IntDB.pdb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/obj/Debug/net9.0/IntDB.sourcelink.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/obj/Debug/net9.0/apphost.exe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/obj/Debug/net9.0/ref/IntDB.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/obj/Debug/net9.0/refint/IntDB.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/obj/IntDB.csproj.nuget.dgspec.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/obj/IntDB.csproj.nuget.g.props" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/obj/IntDB.csproj.nuget.g.targets" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/obj/project.assets.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/obj/project.nuget.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/obj/project.packagespec.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/obj/rider.project.model.nuget.info" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/obj/rider.project.restore.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.int_db/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.int_db/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/int_db/Database.cs" beforeDir="false" afterPath="$PROJECT_DIR$/int_db/Database.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/int_db/Minio.cs" beforeDir="false" afterPath="$PROJECT_DIR$/int_db/Minio.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/int_db/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/int_db/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/int_db/obj/Debug/net8.0/int_db.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/int_db/obj/Debug/net8.0/int_db.AssemblyInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/int_db/obj/int_db.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/int_db/obj/int_db.csproj.nuget.dgspec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/int_db/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/int_db/obj/project.assets.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/int_db/obj/rider.project.model.nuget.info" beforeDir="false" afterPath="$PROJECT_DIR$/int_db/obj/rider.project.model.nuget.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/int_db/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/int_db/obj/rider.project.restore.info" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="DpaMonitoringSettings">
+    <option name="firstShow" value="false" />
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "Antto0509"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Antto0509&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/ClaireVig249/AutomatisationClaireAntoine.git",
-    "accountId": "b86a9cb8-9ed6-4bfb-b013-2614439ac731"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/ClaireVig249/AutomatisationClaireAntoine.git&quot;,
+    &quot;accountId&quot;: &quot;b86a9cb8-9ed6-4bfb-b013-2614439ac731&quot;
   }
-}]]></component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 6
-}]]></component>
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 6
+}</component>
   <component name="ProjectId" id="2sH42U91xcEv9gV414GOEFjmwkA" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -125,6 +52,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    ".NET Project.int_db.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "master",
@@ -156,11 +84,17 @@
       </method>
     </configuration>
     <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
-      <deployment type="docker-compose.yml" />
+      <deployment type="docker-compose.yml">
+        <settings />
+      </deployment>
+      <EXTENSION ID="com.jetbrains.rider.docker.debug" isFastModeEnabled="true" isSslEnabled="false" />
       <method v="2" />
     </configuration>
     <configuration default="true" type="docker-deploy" factoryName="dockerfile" temporary="true">
-      <deployment type="dockerfile" />
+      <deployment type="dockerfile">
+        <settings />
+      </deployment>
+      <EXTENSION ID="com.jetbrains.rider.docker.debug" isFastModeEnabled="true" isSslEnabled="false" />
       <method v="2" />
     </configuration>
     <configuration name="compose.yaml: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" server-name="Docker">
@@ -193,7 +127,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1738098959339</updated>
-      <workItem from="1738098961930" duration="2279000" />
+      <workItem from="1738098961930" duration="2443000" />
+      <workItem from="1738168500240" duration="2651000" />
     </task>
     <servers />
   </component>
