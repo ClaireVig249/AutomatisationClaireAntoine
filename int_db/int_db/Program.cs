@@ -33,10 +33,10 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
+// app.UseHttpsRedirection();
 app.UseRouting();
 app.UseAuthorization();
 
 app.MapControllers(); // Permet aux API d'être accessibles
 
-app.Run();
+app.Run("http://0.0.0.0:80");

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using int_db.scripts;
+using int_db.Models;
 
 namespace int_db.Controllers
 {
@@ -8,17 +9,29 @@ namespace int_db.Controllers
     public class ProcessController(Database db, MinioClientWrapper minio) : ControllerBase
     {
         [HttpPost]
-        public IActionResult Process([FromBody] dynamic data)
+        public IActionResult Process([FromBody] ProcessRequest data)
         {
-            int valeur = data.valeur;
+            try
+            {
+                if (data == null || data.Valeur == 0)
+                {
+                    return BadRequest(new { message = "Valeur invalide" });
+                }
 
-            // Stocker la valeur dans la base de données
-            db.OpenConnection();
-            db.Query = $"INSERT INTO calc (number, is_even, is_prime, is_perfect) VALUES ({valeur}, {valeur % 2 == 0}, 0, 0);";
-            db.ExecuteQuery();
-            db.CloseConnection();
+                int valeur = data.Valeur;
 
-            return Ok(new { message = "Données stockées avec succès", result = valeur });
+                // Stocker la valeur dans la base de données
+                db.OpenConnection();
+                db.Query = $"INSERT INTO calc (number, is_even, is_prime, is_perfect) VALUES ({valeur}, {valeur % 2 == 0}, 0, 0);";
+                db.ExecuteQuery();
+                db.CloseConnection();
+
+                return Ok(new { message = "Données stockées avec succès", result = valeur });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "Une erreur interne s'est produite", error = ex.Message });
+            }
         }
 
         [HttpGet("buckets")]

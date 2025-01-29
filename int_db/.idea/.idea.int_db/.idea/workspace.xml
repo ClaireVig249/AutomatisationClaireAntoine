@@ -13,31 +13,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4e67c0ba-0b5c-4968-b450-ab4085bb1e2e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/int_db/Controllers/ProcessController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ihm/scripts/result.php" beforeDir="false" afterPath="$PROJECT_DIR$/../ihm/scripts/result.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/int_db/Models/ProcessRequest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../calc/src/app/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../calc/src/app/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.int_db/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.int_db/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/int_db.sln" beforeDir="false" afterPath="$PROJECT_DIR$/int_db.sln" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/int_db/Database.cs" beforeDir="false" afterPath="$PROJECT_DIR$/int_db/scripts/Database.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/int_db/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/int_db/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/int_db/Minio.cs" beforeDir="false" afterPath="$PROJECT_DIR$/int_db/scripts/Minio.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/int_db/ProcessController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/int_db/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/int_db/scripts/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/int_db/bin/Debug/net8.0/int_db.deps.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/int_db/bin/Debug/net8.0/int_db.runtimeconfig.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/int_db/int_db.csproj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/int_db/obj/Debug/net8.0/.NETCoreApp,Version=v8.0.AssemblyAttributes.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/int_db/obj/Debug/net8.0/int_db.AssemblyInfo.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/int_db/obj/Debug/net8.0/int_db.GeneratedMSBuildEditorConfig.editorconfig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/int_db/obj/Debug/net8.0/int_db.csproj.FileListAbsolute.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/int_db/obj/Debug/net8.0/int_db.csproj.Up2Date" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/int_db/obj/Debug/net8.0/int_db.sourcelink.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/int_db/obj/int_db.csproj.nuget.dgspec.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/int_db/obj/int_db.csproj.nuget.g.props" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/int_db/obj/int_db.csproj.nuget.g.targets" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/int_db/obj/project.assets.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/int_db/obj/project.packagespec.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/int_db/obj/rider.project.model.nuget.info" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/int_db/obj/rider.project.restore.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/int_db/Controllers/ProcessController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/int_db/Controllers/ProcessController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/int_db/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/int_db/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/int_db/obj/Debug/net8.0/int_db.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/int_db/obj/Debug/net8.0/int_db.AssemblyInfo.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -264,7 +245,7 @@
       <option name="presentableId" value="Default" />
       <updated>1738098959339</updated>
       <workItem from="1738098961930" duration="2443000" />
-      <workItem from="1738168500240" duration="10097000" />
+      <workItem from="1738168500240" duration="12118000" />
     </task>
     <servers />
   </component>
