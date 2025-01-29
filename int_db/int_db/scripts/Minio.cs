@@ -1,6 +1,8 @@
 ﻿using Minio;
 using Minio.DataModel.Args;
 using Minio.Exceptions;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace int_db.scripts
 {
@@ -44,34 +46,6 @@ namespace int_db.scripts
         }
 
         /// <summary>
-        /// Liste les buckets disponibles sur le serveur MinIO.
-        /// </summary>
-        /// <returns></returns>
-        public async Task ListBucketsAsync()
-        {
-            try
-            {
-                var buckets = await _minioClient.ListBucketsAsync();
-                
-                if (buckets.Buckets.Count == 0)
-                {
-                    Console.WriteLine("Aucun bucket trouvé.");
-                    return;
-                }
-                
-                Console.WriteLine("Liste des buckets :");
-                foreach (var bucket in buckets.Buckets)
-                {
-                    Console.WriteLine((string?)bucket.Name);
-                }
-            }
-            catch (MinioException ex)
-            {
-                Console.WriteLine($"Erreur lors de la récupération des buckets : {ex.Message}");
-            }
-        }
-
-        /// <summary>
         /// Ferme la connexion au serveur MinIO.
         /// </summary>
         public void CloseConnection()
@@ -82,13 +56,44 @@ namespace int_db.scripts
         }
 
         /// <summary>
+        /// Liste les buckets disponibles sur le serveur MinIO et retourne les résultats sous forme de liste.
+        /// </summary>
+        /// <returns>Liste des noms de buckets.</returns>
+        public async Task<List<string>> ListBucketsAsync()
+        {
+            var bucketNames = new List<string>();
+
+            try
+            {
+                var buckets = await _minioClient.ListBucketsAsync();
+
+                if (buckets.Buckets.Count == 0)
+                {
+                    Console.WriteLine("Aucun bucket trouvé.");
+                    return bucketNames;
+                }
+
+                foreach (var bucket in buckets.Buckets)
+                {
+                    bucketNames.Add(bucket.Name);
+                }
+            }
+            catch (MinioException ex)
+            {
+                Console.WriteLine($"Erreur lors de la récupération des buckets : {ex.Message}");
+            }
+
+            return bucketNames;
+        }
+
+        /// <summary>
         /// Téléverse un fichier dans un bucket spécifié.
         /// </summary>
-        /// <param name="bucketName"></param>
-        /// <param name="objectName"></param>
-        /// <param name="filePath"></param>
-        /// <returns></returns>
-        public async Task UploadFileAsync(string bucketName, string objectName, string filePath)
+        /// <param name="bucketName">Nom du bucket.</param>
+        /// <param name="objectName">Nom de l'objet.</param>
+        /// <param name="filePath">Chemin du fichier à téléverser.</param>
+        /// <returns>Message de succès ou d'erreur.</returns>
+        public async Task<string> UploadFileAsync(string bucketName, string objectName, string filePath)
         {
             try
             {
@@ -97,22 +102,22 @@ namespace int_db.scripts
                     .WithObject(objectName)
                     .WithFileName(filePath));
 
-                Console.WriteLine($"Fichier {filePath} téléchargé dans le bucket {bucketName} sous le nom {objectName}.");
+                return $"Fichier {filePath} téléversé dans le bucket {bucketName} sous le nom {objectName}.";
             }
             catch (MinioException ex)
             {
-                Console.WriteLine($"Erreur lors de l'upload : {ex.Message}");
+                return $"Erreur lors de l'upload : {ex.Message}";
             }
         }
 
         /// <summary>
         /// Télécharge un fichier depuis un bucket spécifié.
         /// </summary>
-        /// <param name="bucketName"></param>
-        /// <param name="objectName"></param>
-        /// <param name="filePath"></param>
-        /// <returns></returns>
-        public async Task DownloadFileAsync(string bucketName, string objectName, string filePath)
+        /// <param name="bucketName">Nom du bucket.</param>
+        /// <param name="objectName">Nom de l'objet.</param>
+        /// <param name="filePath">Chemin de destination du fichier.</param>
+        /// <returns>Message de succès ou d'erreur.</returns>
+        public async Task<string> DownloadFileAsync(string bucketName, string objectName, string filePath)
         {
             try
             {
@@ -121,11 +126,11 @@ namespace int_db.scripts
                     .WithObject(objectName)
                     .WithFile(filePath));
 
-                Console.WriteLine($"Fichier {objectName} téléchargé depuis le bucket {bucketName} vers {filePath}.");
+                return $"Fichier {objectName} téléchargé depuis le bucket {bucketName} vers {filePath}.";
             }
             catch (MinioException ex)
             {
-                Console.WriteLine($"Erreur lors du téléchargement : {ex.Message}");
+                return $"Erreur lors du téléchargement : {ex.Message}";
             }
         }
     }

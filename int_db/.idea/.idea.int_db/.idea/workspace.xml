@@ -13,12 +13,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4e67c0ba-0b5c-4968-b450-ab4085bb1e2e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/int_db/Models/ProcessRequest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../calc/src/app/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../calc/src/app/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.int_db/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.int_db/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/int_db/Controllers/ProcessController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/int_db/Controllers/ProcessController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/int_db/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/int_db/Program.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/int_db/obj/Debug/net8.0/int_db.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/int_db/obj/Debug/net8.0/int_db.AssemblyInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/int_db/scripts/Database.cs" beforeDir="false" afterPath="$PROJECT_DIR$/int_db/scripts/Database.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/int_db/scripts/Program.cs" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -245,7 +244,7 @@
       <option name="presentableId" value="Default" />
       <updated>1738098959339</updated>
       <workItem from="1738098961930" duration="2443000" />
-      <workItem from="1738168500240" duration="12118000" />
+      <workItem from="1738168500240" duration="14039000" />
     </task>
     <servers />
   </component>
