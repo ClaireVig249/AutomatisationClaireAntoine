@@ -43,13 +43,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['number'])) {
 
         // Vérifier si "result" existe avant d'y accéder
         $resultat_final = isset($result['result']) ? htmlspecialchars($result['result']) : "Aucun résultat disponible.";
-
-        echo "Résultat : " . $resultat_final;
     } catch (Exception $e) {
         // Gérer les erreurs et afficher un message utilisateur
-        echo "Erreur : " . htmlspecialchars($e->getMessage());
+        $error = "Erreur : " . htmlspecialchars($e->getMessage());
     }
-} else {
-    // Si la requête n'est pas POST ou si le champ "number" est manquant
-    echo "Veuillez soumettre un nombre via une requête POST.";
 }

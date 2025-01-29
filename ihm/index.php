@@ -1,3 +1,5 @@
+<? require_once 'scripts/result.php'; ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -23,10 +25,17 @@
         <h2>Bienvenue</h2>
         <p>CalcuPHP#lation est un outil de calcul en ligne. Il vous permet de réaliser des opérations simples et complexes.</p>
         <p>Veuillez saisir un nombre ci-dessous :</p>
-        <form action="/result" method="post">
+        <form method="post">
             <input type="number" name="number" required>
             <button type="submit">Calculer</button>
         </form>
+        <?php if (isset($resultat_final)) : ?>
+            <p class="result">Résultat : <?= $resultat_final ?></p>
+        <?php endif; ?>
+
+        <?php if (isset($error)) : ?>
+            <p class="error"><?= $error ?></p>
+        <?php endif; ?>
     </section>
     <footer>
         <p>© 2024 - Tous droits réservés</p>
