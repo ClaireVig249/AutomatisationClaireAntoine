@@ -11,7 +11,7 @@ def calcul():
     # Appel au service C# (Projet C#)
     response = requests.post("http://int_db:80/api/process", json={"valeur": valeur * 2})
     
-    return jsonify(response.json())
+    return response
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80)

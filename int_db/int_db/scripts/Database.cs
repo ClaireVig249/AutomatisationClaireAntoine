@@ -1,6 +1,6 @@
-﻿using MySql.Data.MySqlClient; // Nécessaire pour interagir avec MySQL
+﻿using MySqlConnector;
 
-namespace IntDB
+namespace int_db.scripts
 {
     /// <summary>
     /// Classe permettant de :
@@ -9,7 +9,7 @@ namespace IntDB
     /// - Récupérer les résultats de ces requêtes
     /// - Fermer la connexion à la base de données
     /// </summary>
-    internal class Database
+    public class Database
     {
         private MySqlConnection _connection;
 
@@ -31,6 +31,14 @@ namespace IntDB
                 _connection = new MySqlConnection(connectionString);
                 _connection.Open();
                 Console.WriteLine($"Connexion à la base de données réussie avec {Host}:{Port}.");
+                
+                // Créer la table si elle n'existe pas
+                Query = "CREATE TABLE IF NOT EXISTS `calc` (`id` INT NOT NULL AUTO_INCREMENT, `number` INT NOT NULL, `is_even` BOOLEAN NOT NULL, `is_prime` BOOLEAN NOT NULL, `is_perfect` BOOLEAN NOT NULL, PRIMARY KEY (`id`));";
+                ExecuteQuery();
+                
+                // Afficher les tables
+                Query = "SHOW TABLES;";
+                ExecuteQuery();
             }
             catch (Exception ex)
             {

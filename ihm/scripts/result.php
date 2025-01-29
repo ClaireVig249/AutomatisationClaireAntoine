@@ -3,20 +3,20 @@
 // Vérifier que la méthode HTTP utilisée est POST et que le champ "number" est défini
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['number'])) {
     // URL du service calc (Python)
-    $url = 'http://localhost:8081';
+    $url = 'http://calc:80/api/calcul';
 
     // Validation et assainissement de l'entrée utilisateur
     $number = filter_var($_POST['number'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
 
     // Préparer les données à envoyer au service
-    $data = array('number' => $number);
+    $data = ['valeur' => $number];
 
     // Configuration de la requête HTTP
     $options = array(
         'http' => array(
-            'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
-            'method'  => 'POST',
-            'content' => http_build_query($data),
+            "header" => "Content-Type: application/json\r\n",
+            "method" => "POST",
+            "content" => json_encode($data),
             'timeout' => 5 // Timeout pour éviter les blocages
         )
     );
@@ -41,8 +41,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['number'])) {
             throw new Exception("La réponse du service n'est pas un JSON valide.");
         }
 
-        // Afficher le résultat
-        echo "Résultat : " . htmlspecialchars($result['result']);
+        // Vérifier si "result" existe avant d'y accéder
+        $resultat_final = isset($result['result']) ? htmlspecialchars($result['result']) : "Aucun résultat disponible.";
+
+        echo "Résultat : " . $resultat_final;
     } catch (Exception $e) {
         // Gérer les erreurs et afficher un message utilisateur
         echo "Erreur : " . htmlspecialchars($e->getMessage());

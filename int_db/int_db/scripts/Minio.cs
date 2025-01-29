@@ -1,8 +1,8 @@
 ﻿using Minio;
-using Minio.Exceptions;
 using Minio.DataModel.Args;
+using Minio.Exceptions;
 
-namespace IntDB
+namespace int_db.scripts
 {
     /// <summary>
     /// Classe permettant de :
@@ -12,7 +12,7 @@ namespace IntDB
     /// - Téléverser un fichier
     /// - Fermer la connexion au serveur MinIO
     /// </summary>
-    internal class MinioClientWrapper
+    public class MinioClientWrapper
     {
         public string Name { get; set; }
         public string Host { get; set; }
@@ -62,7 +62,7 @@ namespace IntDB
                 Console.WriteLine("Liste des buckets :");
                 foreach (var bucket in buckets.Buckets)
                 {
-                    Console.WriteLine(bucket.Name);
+                    Console.WriteLine((string?)bucket.Name);
                 }
             }
             catch (MinioException ex)
