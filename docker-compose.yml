@@ -47,21 +47,33 @@ services:
     image: minio/minio
     command: server /data --console-address ":9001"
     environment:
-      - MINIO_ROOT_USER=minioadmin
-      - MINIO_ROOT_PASSWORD=minioadmin
+      - MINIO_ROOT_USER=minio
+      - MINIO_ROOT_PASSWORD=password
+      - MINIO_ACCESS_KEY=minio
+      - MINIO_SECRET_KEY=password
     volumes:
       - minio_data:/data
     ports:
-      - "9000:9000"
-      - "9001:9001"
+      - "9000:9000" # Port d'accès aux données (API)
+      - "9001:9001" # Port d'accès à l'interface web
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
     networks:
       - calc_net
 
   # Bucket S3 pour Minio
   bucket_s3:
     image: minio/mc
-    entrypoint: mc
-    command: mb s3/minio
+    entrypoint: >
+      /bin/sh -c "
+      /usr/bin/mc config host add myminio http://minio:9000 minio password;
+      /usr/bin/mc mb myminio/bucket-s3;
+      /usr/bin/mc policy set download myminio/bucket-s3;
+      exit 0;
+      "
     depends_on:
       - minio
     networks:
