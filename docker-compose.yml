@@ -3,8 +3,8 @@ services:
   ihm:
     build: ./ihm
     volumes:
-      - ./ihm:/var/www/html
-      - /var/log/apache2/app:/var/log/apache2/
+      - ./ihm/src:/var/www/html
+      - ./ihm/log:/var/log/apache2/
     ports:
       - "8080:80"
     networks:
@@ -49,8 +49,6 @@ services:
     environment:
       - MINIO_ROOT_USER=minio
       - MINIO_ROOT_PASSWORD=password
-      - MINIO_ACCESS_KEY=minio
-      - MINIO_SECRET_KEY=password
     volumes:
       - minio_data:/data
     ports:
@@ -61,21 +59,6 @@ services:
       interval: 30s
       timeout: 20s
       retries: 3
-    networks:
-      - calc_net
-
-  # Bucket S3 pour Minio
-  bucket_s3:
-    image: minio/mc
-    entrypoint: >
-      /bin/sh -c "
-      /usr/bin/mc config host add myminio http://minio:9000 minio password;
-      /usr/bin/mc mb myminio/bucket-s3;
-      /usr/bin/mc policy set download myminio/bucket-s3;
-      exit 0;
-      "
-    depends_on:
-      - minio
     networks:
       - calc_net
 
