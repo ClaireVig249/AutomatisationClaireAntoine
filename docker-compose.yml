@@ -3,7 +3,7 @@ services:
   ihm:
     build: ./ihm
     volumes:
-      - ./ihm:/var/www/html
+      - ./ihm/src:/var/www/html
       - ./ihm/logs:/var/log/apache2
     ports:
       - "8080:80"

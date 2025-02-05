@@ -12,7 +12,7 @@ RUN a2enmod rewrite
 WORKDIR /var/www/html
 
 # Copier le code source
-COPY . .
+COPY ./src .
 
 # Exposer le port pour l'application
 EXPOSE 80
