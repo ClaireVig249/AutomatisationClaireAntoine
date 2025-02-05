@@ -3,8 +3,8 @@ services:
   ihm:
     build: ./ihm
     volumes:
-      - ./ihm/src:/var/www/html
-      - ./ihm/log:/var/log/apache2/
+      - ./ihm:/var/www/html
+      - ./ihm/logs:/var/log/apache2
     ports:
       - "8080:80"
     networks:
@@ -26,6 +26,7 @@ services:
     build: 
       context: ./int_db/
       dockerfile: int_db/Dockerfile
+    
     ports:
       - "8082:80"
     networks:
