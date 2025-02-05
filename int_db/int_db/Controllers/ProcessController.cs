@@ -9,38 +9,84 @@ namespace int_db.Controllers
     public class ProcessController(Database db, MinioClientWrapper minio) : ControllerBase
     {
         [HttpPost]
-        public IActionResult Process([FromBody] ProcessRequest? data)
+        public async Task<IActionResult> Process([FromBody] ProcessRequest? data)
         {
             try
             {
-                if (data == null || data.Valeur == 0)
+                Console.WriteLine($"Données reçues : {System.Text.Json.JsonSerializer.Serialize(data)}");
+                
+                if (data == null)
                 {
-                    return BadRequest(new { message = "Valeur invalide" });
+                    throw new Exception("Les données reçues sont invalides");
                 }
 
-                int valeur = data.Valeur;
-
-                // Stocker la valeur dans la base de données
+                // Récupérer les données
+                int number = data.Number;
+                bool isEven = data.IsEven;
+                bool isPrime = data.IsPrime;
+                bool isPerfect = data.IsPerfect;
+                string syracuse = data.Syracuse;
+                
+                string bucketName = "syracuse";
+                string objectName = $"syracuse-{number}.txt";
+                
+                // --- MySQL ---
+                
+                // Créer la table calc si elle n'existe pas
                 db.OpenConnection();
-                db.Query = $"INSERT INTO calc (number, is_even, is_prime, is_perfect) VALUES ({valeur}, {valeur % 2 == 0}, 0, 0);";
-                db.ExecuteQuery();
-                db.CloseConnection();
+                db.Query = "CREATE TABLE IF NOT EXISTS `calc` (`id` INT NOT NULL AUTO_INCREMENT, `number` INT NOT NULL, `is_even` BOOLEAN NOT NULL, `is_prime` BOOLEAN NOT NULL, `is_perfect` BOOLEAN NOT NULL, PRIMARY KEY (`id`));";
+                if (!db.ExecuteQuery())
+                {
+                    throw new Exception("Erreur lors de la création de la table");
+                }
 
-                return Ok(new { message = "Données stockées avec succès", result = valeur });
+                // Stocker les données dans la base de données
+                db.Query = $"INSERT INTO calc (number, is_even, is_prime, is_perfect) VALUES ({number}, {isEven}, {isPrime}, {isPerfect});";
+                if (!db.ExecuteQuery())
+                {
+                    throw new Exception("Erreur lors de l'insertion des données");
+                }
+                db.CloseConnection();
+                
+                // --- MinIO ---
+                
+                // Créer le bucket syracuse s'il n'existe pas
+                minio.OpenConnection();
+                if (!minio.CreateBucket(bucketName))
+                {
+                    throw new Exception("Erreur lors de la création du bucket");
+                }
+                
+                // Stocker la suite de Syracuse dans un bucket MinIO
+                if (await minio.ObjectExists(bucketName, objectName) == false)
+                {
+                    await minio.UploadSyracuse(bucketName, objectName, syracuse);
+                }
+                
+                minio.CloseConnection();
+
+                return Ok(new { message = "Données stockées avec succès", result = new { number, isEven, isPrime, isPerfect, syracuse } });
             }
             catch (Exception ex)
             {
+                if (db.IsOpen())
+                {
+                    db.CloseConnection();
+                }
+                
+                if (minio.IsOpen())
+                {
+                    minio.CloseConnection();
+                }
                 return StatusCode(500, new { message = "Une erreur interne s'est produite", error = ex.Message });
             }
         }
 
-        [HttpGet("buckets")]
-        public async Task<IActionResult> ListBuckets()
-        {
-            var buckets = await minio.ListBucketsAsync();
-            return Ok(new { buckets });
-        }
-
+        /// <summary>
+        /// Récupère la liste des tables de la base de données.
+        /// Chemin : /api/process/tables
+        /// </summary>
+        /// <returns>Liste des tables.</returns>
         [HttpGet("tables")]
         public IActionResult ListTables()
         {
@@ -48,9 +94,14 @@ namespace int_db.Controllers
             db.Query = "SHOW TABLES;";
             var results = db.ExecuteQueryWithResults();
             db.CloseConnection();
-            return Ok(results);
+            return Ok(new { tables = results });
         }
 
+        /// <summary>
+        /// Récupère la liste des données stockées dans la base de données.
+        /// Chemin : /api/process/datas
+        /// </summary>
+        /// <returns>Liste des données.</returns>
         [HttpGet("datas")]
         public IActionResult ListDatas()
         {
@@ -58,31 +109,35 @@ namespace int_db.Controllers
             db.Query = "SELECT * FROM calc;";
             var results = db.ExecuteQueryWithResults();
             db.CloseConnection();
-            return Ok(results);
+            return Ok(new { datas = results });
         }
-
-        [HttpPost("upload")]
-        public async Task<IActionResult> UploadFile([FromBody] UploadRequest request)
+        
+        /// <summary>
+        /// Récupère la liste des buckets MinIO.
+        /// Chemin : /api/process/buckets
+        /// </summary>
+        /// <returns>Liste des buckets.</returns>
+        [HttpGet("buckets")]
+        public IActionResult ListBuckets()
         {
-            if (string.IsNullOrEmpty(request.BucketName) || string.IsNullOrEmpty(request.ObjectName) || string.IsNullOrEmpty(request.FilePath))
+            try 
             {
-                return BadRequest(new { message = "Paramètres invalides" });
+                minio.OpenConnection();
+                var buckets = minio.ListBuckets();
+                minio.CloseConnection();
+                
+                if (buckets.Result.Count == 0)
+                {
+                    return StatusCode(500, new { message = "Aucun bucket trouvé" });
+                }
+
+                return Ok(new { buckets.Result });
             }
-
-            var result = await minio.UploadFileAsync(request.BucketName, request.ObjectName, request.FilePath);
-            return Ok(new { message = result });
-        }
-
-        [HttpPost("download")]
-        public async Task<IActionResult> DownloadFile([FromBody] DownloadRequest request)
-        {
-            if (string.IsNullOrEmpty(request.BucketName) || string.IsNullOrEmpty(request.ObjectName) || string.IsNullOrEmpty(request.FilePath))
+            catch (Exception ex)
             {
-                return BadRequest(new { message = "Paramètres invalides" });
+                return StatusCode(500, new { message = "Une erreur interne s'est produite", error = ex.Message });
             }
-
-            var result = await minio.DownloadFileAsync(request.BucketName, request.ObjectName, request.FilePath);
-            return Ok(new { message = result });
+            
         }
     }
 }

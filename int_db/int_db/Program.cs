@@ -1,8 +1,4 @@
 using int_db.scripts;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,7 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 
 // Ajouter les services Database et MinIO pour injection de dépendances
-builder.Services.AddSingleton<Database>(sp => new Database
+var db = builder.Services.AddSingleton<Database>(sp => new Database 
 {
     Host = "db",
     Name = "calc",
@@ -18,11 +14,11 @@ builder.Services.AddSingleton<Database>(sp => new Database
     Password = "password"
 });
 
-builder.Services.AddSingleton<MinioClientWrapper>(sp => new MinioClientWrapper
+var minio = builder.Services.AddSingleton<MinioClientWrapper>(sp => new MinioClientWrapper 
 {
-    Host = "minio",
-    AccessKey = "minioadmin",
-    SecretKey = "minioadmin"
+    Endpoint = "minio:9000",
+    AccessKey = "minio",
+    SecretKey = "password"
 });
 
 var app = builder.Build();

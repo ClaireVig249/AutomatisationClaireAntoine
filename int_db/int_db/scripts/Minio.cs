@@ -1,7 +1,10 @@
 ﻿using Minio;
 using Minio.DataModel.Args;
 using Minio.Exceptions;
+using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace int_db.scripts
@@ -10,19 +13,16 @@ namespace int_db.scripts
     /// Classe permettant de :
     /// - Se connecter à un serveur MinIO
     /// - Lister les buckets
-    /// - Télécharger un fichier
     /// - Téléverser un fichier
     /// - Fermer la connexion au serveur MinIO
     /// </summary>
     public class MinioClientWrapper
     {
-        public string Name { get; set; }
-        public string Host { get; set; }
+        private IMinioClient _client;
+
+        public string Endpoint { get; set; }
         public string AccessKey { get; set; }
         public string SecretKey { get; set; }
-        public string Port { get; set; } = "9000"; // Port par défaut pour MinIO
-
-        private MinioClient _minioClient;
 
         /// <summary>
         /// Initialise la connexion avec les paramètres spécifiés.
@@ -31,106 +31,144 @@ namespace int_db.scripts
         {
             try
             {
-                // Initialisation du client MinIO
-                _minioClient = (MinioClient)new MinioClient()
-                    .WithEndpoint(Host, int.Parse(Port))
+                _client = new MinioClient()
+                    .WithEndpoint(Endpoint)
                     .WithCredentials(AccessKey, SecretKey)
                     .Build();
-
-                Console.WriteLine($"Connexion à MinIO réussie avec {Host}:{Port}.");
+                Console.WriteLine($"Connexion à MinIO réussie avec {Endpoint}.");
             }
-            catch (Exception ex)
+            catch (MinioException ex)
             {
                 Console.WriteLine($"Erreur lors de la connexion à MinIO : {ex.Message}");
             }
         }
+        
+        /// <summary>
+        /// Vérifie si la connexion à MinIO est ouverte.
+        /// </summary>
+        /// <returns></returns>
+        public bool IsOpen()
+        {
+            return _client != null;
+        }
 
         /// <summary>
-        /// Ferme la connexion au serveur MinIO.
+        /// Ferme la connexion à MinIO.
         /// </summary>
         public void CloseConnection()
         {
-            // Pas de méthode explicite pour fermer la connexion dans MinIO SDK
-            _minioClient = null;
+            _client.Dispose();
             Console.WriteLine("Connexion à MinIO fermée.");
         }
 
         /// <summary>
-        /// Liste les buckets disponibles sur le serveur MinIO et retourne les résultats sous forme de liste.
+        /// Crée un bucket s'il n'existe pas.
         /// </summary>
-        /// <returns>Liste des noms de buckets.</returns>
-        public async Task<List<string>> ListBucketsAsync()
-        {
-            var bucketNames = new List<string>();
-
-            try
-            {
-                var buckets = await _minioClient.ListBucketsAsync();
-
-                if (buckets.Buckets.Count == 0)
-                {
-                    Console.WriteLine("Aucun bucket trouvé.");
-                    return bucketNames;
-                }
-
-                foreach (var bucket in buckets.Buckets)
-                {
-                    bucketNames.Add(bucket.Name);
-                }
-            }
-            catch (MinioException ex)
-            {
-                Console.WriteLine($"Erreur lors de la récupération des buckets : {ex.Message}");
-            }
-
-            return bucketNames;
-        }
-
-        /// <summary>
-        /// Téléverse un fichier dans un bucket spécifié.
-        /// </summary>
-        /// <param name="bucketName">Nom du bucket.</param>
-        /// <param name="objectName">Nom de l'objet.</param>
-        /// <param name="filePath">Chemin du fichier à téléverser.</param>
-        /// <returns>Message de succès ou d'erreur.</returns>
-        public async Task<string> UploadFileAsync(string bucketName, string objectName, string filePath)
+        public bool CreateBucket(string bucketName)
         {
             try
             {
-                await _minioClient.PutObjectAsync(new PutObjectArgs()
-                    .WithBucket(bucketName)
-                    .WithObject(objectName)
-                    .WithFileName(filePath));
-
-                return $"Fichier {filePath} téléversé dans le bucket {bucketName} sous le nom {objectName}.";
+                bool bucketExists = _client.BucketExistsAsync(new BucketExistsArgs().WithBucket(bucketName)).Result;
+                if (!bucketExists)
+                {
+                    _client.MakeBucketAsync(new MakeBucketArgs().WithBucket(bucketName)).Wait();
+                    Console.WriteLine($"Bucket '{bucketName}' créé avec succès.");
+                }
+                else
+                {
+                    Console.WriteLine($"Bucket '{bucketName}' existe déjà.");
+                }
+                
+                return true;
             }
             catch (MinioException ex)
             {
-                return $"Erreur lors de l'upload : {ex.Message}";
+                Console.WriteLine($"Erreur lors de la création du bucket '{bucketName}' : {ex.Message}");
+                return false;
             }
         }
 
         /// <summary>
-        /// Télécharge un fichier depuis un bucket spécifié.
+        /// Liste les buckets disponibles.
         /// </summary>
-        /// <param name="bucketName">Nom du bucket.</param>
-        /// <param name="objectName">Nom de l'objet.</param>
-        /// <param name="filePath">Chemin de destination du fichier.</param>
-        /// <returns>Message de succès ou d'erreur.</returns>
-        public async Task<string> DownloadFileAsync(string bucketName, string objectName, string filePath)
+        /// <returns>Liste des buckets.</returns>
+        public async Task<List<string>> ListBuckets()
         {
             try
             {
-                await _minioClient.GetObjectAsync(new GetObjectArgs()
+                var list = await _client.ListBucketsAsync().ConfigureAwait(false);
+                
+                List<string> buckets = new List<string>();
+                
+                foreach (var bucket in list.Buckets)
+                {
+                    buckets.Add(bucket.Name + " " + bucket.CreationDate);
+                }
+                
+                return buckets;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"[Bucket]  Exception: {e}");
+                return new List<string>();
+            }
+        }
+        
+        /// <summary>
+        /// Vérifie si un objet existe dans un bucket.
+        /// </summary>
+        /// <param name="bucketName"></param>
+        /// <param name="objectName"></param>
+        /// <returns></returns>
+        public async Task<bool> ObjectExists(string bucketName, string objectName)
+        {
+            try
+            {
+                var statObjectArgs = new StatObjectArgs()
                     .WithBucket(bucketName)
-                    .WithObject(objectName)
-                    .WithFile(filePath));
+                    .WithObject(objectName);
 
-                return $"Fichier {objectName} téléchargé depuis le bucket {bucketName} vers {filePath}.";
+                var result = await _client.StatObjectAsync(statObjectArgs).ConfigureAwait(false);
+                return result != null;
+            }
+            catch (ObjectNotFoundException)
+            {
+                return false;
             }
             catch (MinioException ex)
             {
-                return $"Erreur lors du téléchargement : {ex.Message}";
+                Console.WriteLine($"Erreur lors de la vérification de l'objet '{objectName}' dans le bucket '{bucketName}' : {ex.Message}");
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Stocke une suite de Syracuse dans MinIO sous forme de fichier texte.
+        /// </summary>
+        public async Task<bool> UploadSyracuse(string bucketName, string objectName, string syracuse)
+        {
+            try
+            { 
+                // Convertir en stream
+                byte[] byteArray = Encoding.UTF8.GetBytes(syracuse);
+                using MemoryStream stream = new MemoryStream(byteArray);
+
+                // Envoi à MinIO
+                await _client.PutObjectAsync(new PutObjectArgs()
+                    .WithBucket(bucketName)
+                    .WithObject(objectName)
+                    .WithStreamData(stream)
+                    .WithObjectSize(byteArray.Length)
+                    .WithContentType("text/plain"));
+
+                Console.WriteLine($"Suite de Syracuse stockée dans '{bucketName}/{objectName}'.");
+                
+                return true;
+            }
+            catch (MinioException ex)
+            {
+                Console.WriteLine($"Erreur lors du téléversement de la suite de Syracuse : {ex.Message}");
+                return false;
             }
         }
     }

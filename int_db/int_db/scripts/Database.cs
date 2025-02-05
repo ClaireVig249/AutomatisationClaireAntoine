@@ -21,19 +21,25 @@ namespace int_db.scripts
         {
             try
             {
+                // Initialisation de la connexion MySQL
                 string connectionString = $"Server={Host};Port={Port};Database={Name};Uid={User};Pwd={Password};";
                 _connection = new MySqlConnection(connectionString);
                 _connection.Open();
                 Console.WriteLine($"Connexion à la base de données réussie avec {Host}:{Port}.");
-                
-                // Créer la table si elle n'existe pas
-                Query = "CREATE TABLE IF NOT EXISTS `calc` (`id` INT NOT NULL AUTO_INCREMENT, `number` INT NOT NULL, `is_even` BOOLEAN NOT NULL, `is_prime` BOOLEAN NOT NULL, `is_perfect` BOOLEAN NOT NULL, PRIMARY KEY (`id`));";
-                ExecuteQuery();
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Erreur lors de la connexion à la base de données : {ex.Message}");
             }
+        }
+        
+        /// <summary>
+        /// Vérifie si la connexion à la base de données est ouverte.
+        /// </summary>
+        /// <returns></returns>
+        public bool IsOpen()
+        {
+            return _connection.State == System.Data.ConnectionState.Open;
         }
 
         /// <summary>
@@ -97,18 +103,16 @@ namespace int_db.scripts
         /// <summary>
         /// Exécute une requête SQL sans retourner de résultats.
         /// </summary>
-        public void ExecuteQuery()
+        public bool ExecuteQuery()
         {
             if (_connection == null || _connection.State != System.Data.ConnectionState.Open)
             {
-                Console.WriteLine("Connexion à la base de données non ouverte. Veuillez ouvrir la connexion d'abord.");
-                return;
+                throw new Exception("Connexion à la base de données non ouverte. Veuillez ouvrir la connexion d'abord.");
             }
 
             if (string.IsNullOrEmpty(Query))
             {
-                Console.WriteLine("Requête SQL vide. Veuillez fournir une requête valide.");
-                return;
+                throw new Exception("Requête SQL vide. Veuillez fournir une requête valide.");
             }
 
             try
@@ -118,10 +122,12 @@ namespace int_db.scripts
                     cmd.ExecuteNonQuery();
                 }
                 Console.WriteLine("Requête exécutée avec succès.");
+                return true;
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Erreur lors de l'exécution de la requête : {ex.Message}");
+                return false;
             }
         }
     }
