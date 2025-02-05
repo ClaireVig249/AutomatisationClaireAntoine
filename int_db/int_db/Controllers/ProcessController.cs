@@ -39,13 +39,20 @@ namespace int_db.Controllers
                 {
                     throw new Exception("Erreur lors de la création de la table");
                 }
-
-                // Stocker les données dans la base de données
-                db.Query = $"INSERT INTO calc (number, is_even, is_prime, is_perfect) VALUES ({number}, {isEven}, {isPrime}, {isPerfect});";
-                if (!db.ExecuteQuery())
+                
+                // Vérifier si le nombre existe déjà
+                db.Query = $"SELECT * FROM calc WHERE number = {number};";
+                var result = db.ExecuteQueryWithResults();
+                if (result.Count == 0)
                 {
-                    throw new Exception("Erreur lors de l'insertion des données");
+                    // Insérer les données
+                    db.Query = $"INSERT INTO calc (number, is_even, is_prime, is_perfect) VALUES ({number}, {isEven}, {isPrime}, {isPerfect});";
+                    if (!db.ExecuteQuery())
+                    {
+                        throw new Exception("Erreur lors de l'insertion des données");
+                    }
                 }
+                
                 db.CloseConnection();
                 
                 // --- MinIO ---
