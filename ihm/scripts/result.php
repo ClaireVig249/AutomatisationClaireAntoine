@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['number'])) {
     $number = filter_var($_POST['number'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
 
     // Préparer les données à envoyer au service
-    $data = ['valeur' => $number];
+    $data = ['valeur' => (int)$number];
 
     // Configuration de la requête HTTP
     $options = array(
@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['number'])) {
             if (!isset($result['result'])) {
                 throw new Exception("Résultat non disponible");
             }
-        
+
             $isEven = $result['result']['isEven'];
             $isPerfect = $result['result']['isPerfect'];
             $isPrime = $result['result']['isPrime'];
