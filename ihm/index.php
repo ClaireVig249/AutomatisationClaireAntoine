@@ -29,8 +29,16 @@
             <input type="number" name="number" required>
             <button type="submit">Calculer</button>
         </form>
-        <?php if (isset($resultat_final)) : ?>
-            <p class="result">Résultat : <?= $resultat_final ?></p>
+        <?php if (isset($isEven) && isset($isPerfect) && isset($isPrime) && isset($syracuse)) : ?>
+            <div class=result>
+                <h3>Résultats</h3>
+                <ul>
+                    <li>Le nombre est <?= $isEven ? 'pair' : 'impair' ?></li>
+                    <li>Le nombre est <?= $isPerfect ? 'parfait' : 'imparfait' ?></li>
+                    <li>Le nombre est <?= $isPrime ? 'premier' : 'non premier' ?></li>
+                    <li>Suite de Syracuse : <?= $syracuse ?></li>
+                </ul>
+            </div>
         <?php endif; ?>
 
         <?php if (isset($error)) : ?>

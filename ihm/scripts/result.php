@@ -28,21 +28,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['number'])) {
     try {
         $response = file_get_contents($url, false, $context);
 
-        // Vérifier si la réponse est valide
-        if ($response === FALSE) {
-            throw new Exception("Impossible de se connecter au service de calcul.");
-        }
-
         // Décoder la réponse JSON
         $result = json_decode($response, true);
 
-        // Vérifier si le JSON est valide
-        if (json_last_error() !== JSON_ERROR_NONE) {
-            throw new Exception("La réponse du service n'est pas un JSON valide.");
+        // Vérifier si la réponse contient une erreur
+        if (isset($result['error'])) {
+            // Gérer les erreurs et afficher un message utilisateur
+            $error = "Erreur : " . htmlspecialchars($result['error']);
+        } else {
+            // Récupérer les données du résultat
+            $isEven = $result['result']['isEven'];
+            $isPerfect = $result['result']['isPerfect'];
+            $isPrime = $result['result']['isPrime'];
+            $syracuse = $result['result']['syracuse'];
         }
-
-        // Vérifier si "result" existe avant d'y accéder
-        $resultat_final = isset($result['result']) ? htmlspecialchars($result['result']) : "Aucun résultat disponible.";
     } catch (Exception $e) {
         // Gérer les erreurs et afficher un message utilisateur
         $error = "Erreur : " . htmlspecialchars($e->getMessage());
