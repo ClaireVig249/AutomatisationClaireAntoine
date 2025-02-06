@@ -32,6 +32,8 @@ services:
   # Base de données MySQL
   db:
     image: mysql:8.0
+    volumes:
+      - ./mysql_data:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: calc
@@ -48,7 +50,7 @@ services:
       - MINIO_ROOT_USER=minio
       - MINIO_ROOT_PASSWORD=password
     volumes:
-      - minio_data:/data
+      - ./minio_data:/data
     ports:
       - "9000:9000" # Port d'accès aux données (API)
       - "9001:9001" # Port d'accès à l'interface web
@@ -63,6 +65,3 @@ services:
 networks:
   calc_net:
     driver: bridge
-
-volumes:
-  minio_data:

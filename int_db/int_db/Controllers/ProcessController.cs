@@ -146,5 +146,32 @@ namespace int_db.Controllers
             }
             
         }
+        
+        /// <summary>
+        /// Récupère la liste des objets MinIO d'un bucket.
+        /// </summary>
+        /// <param name="bucketName"></param>
+        /// <returns>Liste des objets.</returns>
+        [HttpGet("objects/{bucketName}")]
+        public IActionResult ListObjects(string bucketName)
+        {
+            try
+            {
+                minio.OpenConnection();
+                var objects = minio.ListObjects(bucketName);
+                minio.CloseConnection();
+                
+                if (objects.Result.Count == 0)
+                {
+                    return StatusCode(500, new { message = "Aucun objet trouvé" });
+                }
+
+                return Ok(new { objects.Result });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "Une erreur interne s'est produite", error = ex.Message });
+            }
+        }
     }
 }

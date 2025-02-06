@@ -88,3 +88,6 @@ ENV/
 # Datasource local storage ignored files
 /dataSources/
 /dataSources.local.xml
+
+minio_data/
+mysql_data/

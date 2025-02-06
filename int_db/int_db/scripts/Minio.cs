@@ -115,6 +115,35 @@ namespace int_db.scripts
         }
         
         /// <summary>
+        /// Liste les objets d'un bucket.
+        /// </summary>
+        /// <param name="bucketName"></param>
+        /// <returns>Liste des objets.</returns>
+        public async Task<List<string>> ListObjects(string bucketName)
+        {
+            try
+            {
+                var list = new ListObjectsArgs()
+                    .WithBucket(bucketName)
+                    .WithRecursive(true);
+                
+                List<string> objects = new List<string>();
+                
+                await foreach(var item in _client.ListObjectsEnumAsync(list).ConfigureAwait(false))
+                {
+                    objects.Add(item.Key);
+                }
+                
+                return objects;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"[Object]  Exception: {e}");
+                return new List<string>();
+            }
+        }
+        
+        /// <summary>
         /// Vérifie si un objet existe dans un bucket.
         /// </summary>
         /// <param name="bucketName"></param>
