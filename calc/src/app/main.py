@@ -1,5 +1,8 @@
 from flask import Flask, request, jsonify
 import requests
+# importation des fichiers de calculs
+import calculs
+import suiteSyracuse
 
 app = Flask(__name__)
 
@@ -8,10 +11,16 @@ def calcul():
     # Récupérer les données JSON de la requête
     data = request.json
     valeur = data.get("valeur", 0)
+    
+    # Fait appel aux fonctions de calculs.py et suiteSyracuse.py
+    pair = calculs.est_pair_ou_impair(valeur)
+    premier = calculs.est_premier(valeur)
+    parfait = calculs.est_parfait(valeur)
+    syracuse = suiteSyracuse.syracuse(valeur)
 
     try:
         # Appel au service C# (Projet C#)
-        response = requests.post("http://int_db:80/api/process", json={"valeur": valeur})
+        response = requests.post("http://int_db:80/api/process", json={"Number": valeur, "IsEven": pair, "IsPrime": premier, "IsPerfect": parfait, "Syracuse": syracuse})
         
         # Vérifier si la requête a réussi
         if response.status_code == 200:

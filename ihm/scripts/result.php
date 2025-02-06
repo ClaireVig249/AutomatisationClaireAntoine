@@ -37,6 +37,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['number'])) {
             $error = "Erreur : " . htmlspecialchars($result['error']);
         } else {
             // Récupérer les données du résultat
+            if (!isset($result['result'])) {
+                throw new Exception("Résultat non disponible");
+            }
+        
             $isEven = $result['result']['isEven'];
             $isPerfect = $result['result']['isPerfect'];
             $isPrime = $result['result']['isPrime'];
