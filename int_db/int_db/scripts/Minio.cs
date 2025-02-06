@@ -34,6 +34,7 @@ namespace int_db.scripts
                 _client = new MinioClient()
                     .WithEndpoint(Endpoint)
                     .WithCredentials(AccessKey, SecretKey)
+                    .WithHttpClient(new HttpClient { Timeout = TimeSpan.FromMinutes(2) })
                     .Build();
                 Console.WriteLine($"Connexion à MinIO réussie avec {Endpoint}.");
             }
@@ -57,8 +58,12 @@ namespace int_db.scripts
         /// </summary>
         public void CloseConnection()
         {
-            _client.Dispose();
-            Console.WriteLine("Connexion à MinIO fermée.");
+            if (_client != null)
+            {
+                _client.Dispose();
+                _client = null;
+                Console.WriteLine("Connexion à MinIO fermée.");
+            }
         }
 
         /// <summary>

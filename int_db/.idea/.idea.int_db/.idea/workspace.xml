@@ -15,7 +15,10 @@
     <list default="true" id="4e67c0ba-0b5c-4968-b450-ab4085bb1e2e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.int_db/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.int_db/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/int_db/Controllers/ProcessController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/int_db/Controllers/ProcessController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/int_db/obj/Debug/net8.0/int_db.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/int_db/obj/Debug/net8.0/int_db.AssemblyInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/int_db/obj/int_db.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/int_db/obj/int_db.csproj.nuget.dgspec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/int_db/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/int_db/obj/project.assets.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/int_db/obj/rider.project.model.nuget.info" beforeDir="false" afterPath="$PROJECT_DIR$/int_db/obj/rider.project.model.nuget.info" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/int_db/scripts/Minio.cs" beforeDir="false" afterPath="$PROJECT_DIR$/int_db/scripts/Minio.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -248,7 +251,7 @@
       <workItem from="1738750046597" duration="2558000" />
       <workItem from="1738767837615" duration="7846000" />
       <workItem from="1738787213891" duration="7886000" />
-      <workItem from="1738848245131" duration="3027000" />
+      <workItem from="1738848245131" duration="4661000" />
     </task>
     <servers />
   </component>
