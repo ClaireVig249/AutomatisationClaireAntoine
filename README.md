@@ -64,8 +64,8 @@ Le projet repose sur cinq conteneurs Docker :
 `http://localhost:8081`
 
 - `POST /api/calcul`
-  - Input : `{ "number": 7 }`
-  - Output : `{ "message": "Calculs effectués avec succès", "result": { "number": 7, "isEven": false, "isPrime": true, "isPerfect": false, "syracuse": "7, 22, 11, 34, 17, 52, 26, 13, 40, 20, 10, 5, 16, 8, 4, 2, 1" } }`
+  - Input : `{ "valeur": 7 }`
+  - Output : `{ "message": "Données stockées avec succès", "result": { "number: 7, "isEven": true, "isPerfect": true, "syracuse": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10" } }`
 
 ### **int_db (C#)**
 
